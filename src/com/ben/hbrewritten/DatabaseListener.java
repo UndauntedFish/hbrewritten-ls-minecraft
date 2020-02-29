@@ -55,10 +55,11 @@ public class DatabaseListener implements Listener
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "ACTIVE_CLASS: " + ACTIVE_CLASS);
 		
 		
+		// Inserts the player's data into the db as if they never logged on before
 		try
 		{
 			main.db.prepareStatement("INSERT INTO " + main.db.getTable() + " VALUES('" + UUID + "', " + POINTS + ", '" + FIRST_LOGIN + "', " + SHARD_CAPTURES + ", '" + RANK + "', " + KILLS_AS_HB + ", " + DEATHS_AS_HB + ", " + KILLS_AS_S + ", " + DEATHS_AS_S + ", '" + ACTIVE_CLASS + "');").executeUpdate();
-			main.db.prepareStatement("INSERT INTO prem_classes(UUID) VALUES(LAST_INSERT_ID());").executeUpdate();
+			main.db.prepareStatement("INSERT INTO prem_classes(UUID) VALUES('" + UUID + "');").executeUpdate();
 		} catch (SQLException e1)
 		{
 			e1.printStackTrace();
