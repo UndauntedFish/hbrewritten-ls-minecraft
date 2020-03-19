@@ -18,9 +18,7 @@ public class Main extends JavaPlugin
 	
 	// Connection used throughout all classes to send queries to the database as set in DatabaseListener
 	public Connection connection;
-	
-	
-	
+		
 	@Override
 	public void onEnable()
 	{
@@ -28,7 +26,7 @@ public class Main extends JavaPlugin
 		registerEnchGlow();
 		
 		// Event Handlers
-		Bukkit.getPluginManager().registerEvents(new DatabaseListener(), this);	
+		Bukkit.getPluginManager().registerEvents(new DatabaseListener(this), this);	
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
 

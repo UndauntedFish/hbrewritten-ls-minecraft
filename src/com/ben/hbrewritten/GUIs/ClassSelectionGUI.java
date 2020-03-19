@@ -20,15 +20,15 @@ public class ClassSelectionGUI
 	private static Main main = new Main();
 	
 	/* ITEMSTACKS DECLARATION */
+	
 	private static ItemStack scout = null, archer = null, priest = null, wizard = null, demo = null, 
 			mage = null, sorceror = null, paladin = null;
+	
 	private static LeatherArmorMeta scoutMeta = null, archerMeta = null, priestMeta = null, wizardMeta = null, demoMeta = null, 
 			mageMeta = null, sorcerorMeta = null, paladinMeta = null;
 	
 	/*
 	 * Displays the class selection GUI to a specified player.
-	 * 
-	 * @param  player  The GUI will be shown to this player.
 	 */
 	public static void apply(Player player)
 	{

@@ -14,17 +14,17 @@ import com.ben.lobbyapi.LobbyAPI;
 public class DatabaseListener implements Listener
 {	
 	private String table;
-	private Main main = new Main();
+	private Main main;
 	
 	// player table attributes
 	private String UUID, RANK, ACTIVE_CLASS, FIRST_LOGIN; 
 	private int POINTS, SHARD_CAPTURES, KILLS_AS_HB, DEATHS_AS_HB, KILLS_AS_S, DEATHS_AS_S;
-	
-	private LobbyAPI lapi = new LobbyAPI();
-	
-	public DatabaseListener()
+		
+	public DatabaseListener(Main main)
 	{		
-		lapi.db.enterHostData( 
+		this.main = main;
+		
+		LobbyAPI.db.enterHostData( 
 				main.getConfig().getString("host"), 
 				main.getConfig().getString("database"), 
 				main.getConfig().getString("username"), 
@@ -35,14 +35,14 @@ public class DatabaseListener implements Listener
 		
 		try
 		{
-			lapi.db.openConnection();
+			LobbyAPI.db.openConnection();
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		
 		// The connection is now set up and ready to accept queries!
-		main.connection = lapi.db.getConnection();
+		main.connection = LobbyAPI.db.getConnection();
 	}
 	
 	@EventHandler
@@ -77,7 +77,7 @@ public class DatabaseListener implements Listener
 		Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "ACTIVE_CLASS: " + ACTIVE_CLASS);
 		*/
 		
-		if (!lapi.db.isInDb(UUID, table, "uuid"))
+		if (!LobbyAPI.db.isInDb(UUID, table, "uuid"))
 		{
 			// Inserts the player's data into the db as if they never logged on before
 			try

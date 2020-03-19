@@ -20,9 +20,9 @@ public class RightclickListener implements Listener
 			if (player.getInventory().getItemInMainHand().getType() != null 
 					&& player.getInventory().getItemInMainHand().getType() == Material.COMPASS)
 			{
+				player.sendMessage("You right-clicked a " + e.getItem().getItemMeta().getDisplayName());
 				ClassSelectionGUI.apply(player);
 			}
 		}
-		return;
 	}
 }
