@@ -1,5 +1,6 @@
 name: TheHerobrineRewritten
 author: UndauntedPhish
 version: 0.2
+api-version: 1.15
 main: com.ben.hbrewritten.Main
 description: Recreation of The Herobrine minigame that used to exist on the Hive server.

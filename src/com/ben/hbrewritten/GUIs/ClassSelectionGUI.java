@@ -27,6 +27,7 @@ public class ClassSelectionGUI
 	private static LeatherArmorMeta scoutMeta = null, archerMeta = null, priestMeta = null, wizardMeta = null, demoMeta = null, 
 			mageMeta = null, sorcerorMeta = null, paladinMeta = null;
 	
+	
 	/*
 	 * Displays the class selection GUI to a specified player.
 	 */
@@ -78,12 +79,10 @@ public class ClassSelectionGUI
 		 * FROM player 
 		 * WHERE uuid = '<input UUID>';
 		 */
-		Statement stmt;
-		ResultSet rs;
 		try
 		{
-			stmt = main.connection.createStatement();
-			rs = stmt.executeQuery("SELECT active_class AS activeClass FROM player WHERE uuid = '" + player.getUniqueId() + "';");
+			Statement stmt = Main.db.connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT active_class AS activeClass FROM player WHERE uuid = '" + player.getUniqueId() + "';");
 			return rs.getString("activeClass");
 		} catch (SQLException e)
 		{
@@ -100,10 +99,9 @@ public class ClassSelectionGUI
 		 * SET active_class = '<input Class such as PALADIN>' 
 		 * WHERE uuid = '<input UUID>';
 		 */
-		Statement stmt;
 		try
 		{
-			stmt = main.connection.createStatement();
+			Statement stmt = Main.db.connection.createStatement();
 			stmt.executeUpdate("UPDATE player SET active_class = '" + myclass + "' WHERE uuid = '" + player.getUniqueId() + "';");
 		} catch (SQLException e)
 		{
