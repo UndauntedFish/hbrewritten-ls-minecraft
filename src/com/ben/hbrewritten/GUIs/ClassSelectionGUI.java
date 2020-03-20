@@ -1,8 +1,8 @@
 package com.ben.hbrewritten.GUIs;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -17,7 +17,7 @@ import com.ben.hbrewritten.Main;
 
 public class ClassSelectionGUI
 {
-	private static Main main = new Main();
+	private static Main main = Main.getInstance();
 	
 	/* ITEMSTACKS DECLARATION */
 	
@@ -39,18 +39,12 @@ public class ClassSelectionGUI
 		/* LORES */
 		
 		/* ITEMSTACKS SETTING */
+		loadDefaultState();
+		
 		if (!getActiveClass(player).equals(null))
 		{
-			// selected state: if a player already has a clas active, mark it as selected. All else is deselected.
-			
-			setActiveClass(player, getActiveClass(player)); // updates newly active class in MySQL database
+			// selected state: if a player already has a class active, mark it as selected. All else is deselected.
 			selectClass(getActiveClass(player)); // updates newly active class in the GUI
-		}
-		else
-		{
-			// default state: if a player has no active class, all classes are marked as deselected.
-				// this should never actually happen, since the default class is always scout.
-			loadDefaultState();
 		}
 		
 		/* ITEM SETTING */
@@ -72,18 +66,20 @@ public class ClassSelectionGUI
 	 * SQL Query that fetches the player's active class from the database.
 	 */
 	public static String getActiveClass(Player player)
-	{
-		/*
-		 * Query:
-		 * SELECT active_class as activeClass 
-		 * FROM player 
-		 * WHERE uuid = '<input UUID>';
-		 */
+	{		
+		String sql = "SELECT active_class ";
+			  sql += "FROM hbstats ";
+			  sql += "WHERE uuid = ?";
 		try
 		{
-			Statement stmt = Main.db.connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT active_class AS activeClass FROM player WHERE uuid = '" + player.getUniqueId() + "';");
-			return rs.getString("activeClass");
+			PreparedStatement ps = Main.db.connection.prepareStatement(sql);
+			ps.setString(1, player.getUniqueId().toString());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next())
+			{
+				return rs.getString(1);
+			}
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -91,20 +87,24 @@ public class ClassSelectionGUI
 		return null;
 	}
 	
-	private static void setActiveClass(Player player, String myclass)
+	/*
+	 * SQL Query that updates the player's active class in the database.
+	 */
+	public static void setActiveClass(Player player, String myclass)
 	{
-		/*
-		 * Query:
-		 * UPDATE player 
-		 * SET active_class = '<input Class such as PALADIN>' 
-		 * WHERE uuid = '<input UUID>';
-		 */
+		String sql = "UPDATE hbstats ";
+			  sql += "SET active_class = ? ";
+			  sql += "WHERE uuid = ?";
+		
 		try
 		{
-			Statement stmt = Main.db.connection.createStatement();
-			stmt.executeUpdate("UPDATE player SET active_class = '" + myclass + "' WHERE uuid = '" + player.getUniqueId() + "';");
+			PreparedStatement ps = Main.db.connection.prepareStatement(sql);
+			ps.setString(1, myclass);
+			ps.setString(2, player.getUniqueId().toString());
+			ps.executeUpdate();
 		} catch (SQLException e)
 		{
+			Bukkit.getConsoleSender().sendMessage("[HBR] Error while setting the class: " + myclass + "! Is it a vaild class?");
 			e.printStackTrace();
 		}
 	}
@@ -113,7 +113,7 @@ public class ClassSelectionGUI
 	 * Helper function to applyClassSelectionGUI().
 	 * Will take in a class and set it as selected in the GUI.
 	 */
-	private static void selectClass(String myclass)
+	public static void selectClass(String myclass)
 	{
 		loadDefaultState();
 		
@@ -124,32 +124,39 @@ public class ClassSelectionGUI
 		{
 			case "SCOUT":
 				scoutMeta.addEnchant(glow, 1, true);
+				scout.setItemMeta(scoutMeta);
 				break;
 			case "ARCHER":
 				archerMeta.addEnchant(glow, 1, true);
+				archer.setItemMeta(archerMeta);
 				break;
 			case "PRIEST":
 				priestMeta.addEnchant(glow, 1, true);
+				priest.setItemMeta(priestMeta);
 				break;
 			case "WIZARD":
 				wizardMeta.addEnchant(glow, 1, true);
+				wizard.setItemMeta(wizardMeta);
 				break;
 			case "DEMO":
 				demoMeta.addEnchant(glow, 1, true);
+				demo.setItemMeta(demoMeta);
 				break;
 			case "MAGE":
 				mageMeta.addEnchant(glow, 1, true);
+				mage.setItemMeta(mageMeta);
 				break;
 			case "PALADIN":
 				paladinMeta.addEnchant(glow, 1, true);
+				paladin.setItemMeta(paladinMeta);
 				break;
 			case "SORCEROR":
 				sorcerorMeta.addEnchant(glow, 1, true);
+				sorceror.setItemMeta(sorcerorMeta);
 				break;
 			default:
 				return;
 		}
-		
 	}
 	
 	/*
@@ -160,34 +167,50 @@ public class ClassSelectionGUI
 	{
 		scout = new ItemStack(Material.LEATHER_HELMET);
 		scoutMeta = (LeatherArmorMeta) scout.getItemMeta();
+		scoutMeta.setDisplayName("Scout");
 		scoutMeta.setColor(Color.YELLOW);
+		scout.setItemMeta(scoutMeta);
 		
 		archer = new ItemStack(Material.LEATHER_HELMET);
 		archerMeta = (LeatherArmorMeta) archer.getItemMeta();
+		archerMeta.setDisplayName("Archer");
 		archerMeta.setColor(Color.GREEN);
+		archer.setItemMeta(archerMeta);
 
 		priest = new ItemStack(Material.LEATHER_HELMET);
 		priestMeta = (LeatherArmorMeta) priest.getItemMeta();
+		priestMeta.setDisplayName("Priest");
 		priestMeta.setColor(Color.SILVER);
+		priest.setItemMeta(priestMeta);
 
 		wizard = new ItemStack(Material.LEATHER_HELMET);
 		wizardMeta = (LeatherArmorMeta) wizard.getItemMeta();
+		wizardMeta.setDisplayName("Wizard");
 		wizardMeta.setColor(Color.FUCHSIA);
+		wizard.setItemMeta(wizardMeta);
 
 		demo = new ItemStack(Material.LEATHER_HELMET);
 		demoMeta = (LeatherArmorMeta) demo.getItemMeta();
+		demoMeta.setDisplayName("Demo");
 		demoMeta.setColor(Color.WHITE);
+		demo.setItemMeta(demoMeta);
 
 		mage = new ItemStack(Material.LEATHER_HELMET);
 		mageMeta = (LeatherArmorMeta) mage.getItemMeta();
+		mageMeta.setDisplayName("Mage");
 		mageMeta.setColor(Color.fromRGB(173, 216, 230)); // Light blue #add8e6
+		mage.setItemMeta(mageMeta);
 		
 		paladin = new ItemStack(Material.LEATHER_HELMET);
 		paladinMeta = (LeatherArmorMeta) paladin.getItemMeta();
+		paladinMeta.setDisplayName("Paladin");
 		paladinMeta.setColor(Color.ORANGE);
+		paladin.setItemMeta(paladinMeta);
 		
 		sorceror = new ItemStack(Material.LEATHER_HELMET);
 		sorcerorMeta = (LeatherArmorMeta) sorceror.getItemMeta();
+		sorcerorMeta.setDisplayName("Sorceror");
 		sorcerorMeta.setColor(Color.RED);
+		sorceror.setItemMeta(sorcerorMeta);
 	}
 }

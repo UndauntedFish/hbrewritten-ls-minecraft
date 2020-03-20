@@ -14,7 +14,10 @@ import com.ben.hbrewritten.database.DatabaseListener;
 
 public class Main extends JavaPlugin
 {
-	// Key used in com.ben.hbrewritten.GUIs.ClassSelectionGUI to enable enchantment glows
+	// Instance of this main class used throughout all classes. Accessed via Main.getInstance().
+	private static Main instance;
+	
+	// Key used in com.ben.hbrewritten.GUIs.ClassSelectionGUI to enable enchantment glows.
 	public NamespacedKey key = new NamespacedKey(this, getDescription().getName());
 	
 	// Database setup class used to send queries. Used throughout all classes.
@@ -25,14 +28,21 @@ public class Main extends JavaPlugin
 	{
 		loadConfig();
 		registerEnchGlow();
+		instance = this;
 		
 		// Sets up database connection
-		db = new Database(this);
+		db = new Database();
 		
 		// EventHandlers
         Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
-        Bukkit.getPluginManager().registerEvents(new DatabaseListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new DatabaseListener(), this);
+	}
+	
+	@Override
+	public void onDisable()
+	{
+		instance = null;
 	}
 	
 	// Loads info from config.yml
@@ -71,4 +81,10 @@ public class Main extends JavaPlugin
             e.printStackTrace();
         }
     }
+	
+	// Gets an instance of the Main class to be used by other classes.
+	public static Main getInstance()
+	{
+		return instance;
+	}
 }

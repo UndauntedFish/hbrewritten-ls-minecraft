@@ -19,9 +19,10 @@ public class Database
 	private String host, database, username, password;
 	private int port;
 	
-	public Database(Main main)
+	public Database()
 	{
-		// Connects minecraft plugin to the database management system
+		// Connects minecraft plugin to the database management system with credentials from config.yml
+		Main main = Main.getInstance();
 		host = main.getConfig().getString("host");
 		port = main.getConfig().getInt("port");
 		database = main.getConfig().getString("database");
@@ -52,34 +53,6 @@ public class Database
 		this.host + ":" + this.port + "/" + this.database, this.username, this.password);
 	}
 	
-	/* Sends a user-inputed query to the DBMS. 
-	public static ResultSet sendQuery(String query)
-	{
-		try
-		{
-			Statement stmt = connection.createStatement();
-			return stmt.executeQuery(query);
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	// Sends a user-inputed update to the DBMS.
-	public static int sendUpdate(String update)
-	{
-		try
-		{
-			Statement stmt = connection.createStatement();
-			return stmt.executeUpdate(update);
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	
 	/* 
 	 * If the player's uuid does not appear in the db, consider them to be new. This is their first login.
 	 * If the player's uuid DOES appear in the db, then it's not their first login.
@@ -88,13 +61,6 @@ public class Database
 	{	
 		int numberOfLogins = 0;
 		
-		/* 
-		 * Query: 
-		 * 
-		 * SELECT COUNT(uuid) AS uuidcount 
-		 * FROM player 
-		 * WHERE uuid = <arg_uuid>;
-		 */
 		String sql = "SELECT COUNT(uuid) ";
 			  sql += "FROM player ";
 			  sql += "WHERE uuid = ?";
@@ -112,18 +78,6 @@ public class Database
 		{
 			e.printStackTrace();
 		}
-
-		/*
-		try
-		{
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT COUNT(" + column + ") AS uuidcount FROM " + table + " WHERE " + column + " = '" + UUID + "';");
-			numberOfLogins = rs.getInt("uuidcount");
-		} catch (SQLException e1)
-		{
-			e1.printStackTrace();
-		}
-		*/
 		
 		if (numberOfLogins > 0)
 		{
