@@ -2,7 +2,7 @@ package com.ben.hbrewritten.enums;
 
 import org.bukkit.ChatColor;
 
-public enum Ranks
+public enum Rank
 {
 	SPIRIT       (0, ChatColor.GRAY + "Spirit"),
 	DEFENDER     (100, ChatColor.DARK_GRAY + "Defender"),
@@ -17,19 +17,19 @@ public enum Ranks
 	MYSTERIA     (25000, ChatColor.LIGHT_PURPLE + "Mysteria"),
 	WIDOWER      (35000, ChatColor.DARK_GRAY + "Widower"),
 	PARANORMAL   (45000, ChatColor.BLUE + "Paranormal"),
-	SPECTRAL     (60000, ChatColor.GREEN + "Spectral"),
+	SPECTRAL     (60000, ChatColor.GOLD + "Spectral"),
 	MYTHICAL     (80000, ChatColor.RED + "Mythical"),
-	GHOSTBUSTER  (100000, ChatColor.WHITE + "Ghostbuster"),
-	SPOOKY       (150000, ChatColor.GOLD + "Spooky"),
-	ETHEREAL     (200000, ChatColor.GREEN + "Ethereal"),
-	DEMONHUNTER  (250000, ChatColor.RED + "DemonHunter"),
-	DIVINE       (300000, ChatColor.DARK_PURPLE + "Divine"),
+	GHOSTBUSTER  (100000, ChatColor.WHITE + "" + ChatColor.BOLD + "Ghostbuster"),
+	SPOOKY       (150000, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Spooky"),
+	ETHEREAL     (200000, ChatColor.GREEN + "" + ChatColor.BOLD + "Ethereal"),
+	DEMONHUNTER  (250000, ChatColor.RED + "" + ChatColor.BOLD + "DemonHunter"),
+	DIVINE       (300000, ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Divine"),
 	DEATHBRINGER (-1, ChatColor.BOLD + "" + ChatColor.DARK_RED + "Death Bringer");
 	
 	private final int POINTSREQUIRED;
 	private final String DISPLAYNAME;
 	
-	private Ranks(int pointsRequired, String displayName)
+	private Rank(int pointsRequired, String displayName)
 	{
 		this.POINTSREQUIRED = pointsRequired;
 		this.DISPLAYNAME = displayName;
@@ -40,7 +40,7 @@ public enum Ranks
 		return POINTSREQUIRED;
 	}
 	
-	public String getRank(int points)
+	public String getDisplayName()
 	{
 		return DISPLAYNAME;
 	}

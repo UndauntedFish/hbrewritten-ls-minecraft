@@ -4,3 +4,7 @@ version: 0.2
 api-version: 1.15
 main: com.ben.hbrewritten.Main
 description: Recreation of The Herobrine minigame that used to exist on the Hive server.
+commands:
+  points:
+    description: Returns config.yml string and number to player.
+    usage: /points <set/revert> <player> <point value to set/leave blank for revert>

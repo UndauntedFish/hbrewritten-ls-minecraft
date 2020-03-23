@@ -4,25 +4,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.ben.hbrewritten.Main;
 
 public class DatabaseListener implements Listener
 {	
-	private String uuid;
+	private static String uuid;
 		
 	public DatabaseListener()
 	{				
 		Main.getInstance().getConfig().getString("table");
 	}
 	
-	@EventHandler
-	public void onJoin(PlayerJoinEvent e)
+	public static void addPlayerToDB(Player player)
 	{
-		Player player = e.getPlayer();
 		uuid = player.getUniqueId().toString();
 		
 		/* Setting first login date: No longer needed since DMBS records this by default.

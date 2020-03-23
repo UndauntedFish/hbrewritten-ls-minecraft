@@ -10,7 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.ben.hbrewritten.GUIs.InventoryClickListener;
 import com.ben.hbrewritten.GUIs.RightclickListener;
 import com.ben.hbrewritten.database.Database;
-import com.ben.hbrewritten.database.DatabaseListener;
+import com.ben.hbrewritten.listeners.PlayerJoinListener;
+import com.ben.hbrewritten.lobbytimer.Timer;
 
 public class Main extends JavaPlugin
 {
@@ -22,6 +23,9 @@ public class Main extends JavaPlugin
 	
 	// Database setup class used to send queries. Used throughout all classes.
 	public static Database db;
+	
+	// Lobby timer. Accessed by the PlayerJoinListener to add players to the bossbar.
+	public Timer lobbyTimer;
 		
 	@Override
 	public void onEnable()
@@ -33,10 +37,16 @@ public class Main extends JavaPlugin
 		// Sets up database connection
 		db = new Database();
 		
+        // Sets up new lobby timer
+		lobbyTimer = new Timer();
+		
 		// EventHandlers
         Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
-        Bukkit.getPluginManager().registerEvents(new DatabaseListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        
+        // Commands
+        getCommand("points").setExecutor(new PointsCommand());
 	}
 	
 	@Override
