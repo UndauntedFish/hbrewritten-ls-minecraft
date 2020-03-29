@@ -5,12 +5,14 @@ import java.lang.reflect.Field;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ben.hbrewritten.GUIs.InventoryClickListener;
 import com.ben.hbrewritten.GUIs.RightclickListener;
 import com.ben.hbrewritten.database.Database;
 import com.ben.hbrewritten.listeners.PlayerJoinListener;
+import com.ben.hbrewritten.listeners.PlayerLeaveListener;
 import com.ben.hbrewritten.lobbytimer.Timer;
 
 public class Main extends JavaPlugin
@@ -45,6 +47,8 @@ public class Main extends JavaPlugin
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
+
 
         // Commands
         getCommand("points").setExecutor(new PointsCommand());
@@ -53,6 +57,15 @@ public class Main extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
+		// If any players bought a HB pass, refund them.
+		for (Player p : Bukkit.getOnlinePlayers())
+		{
+			if (HerobrinePassListener.isHerobrine(p))
+			{
+				HerobrinePassListener.removeHBPass(p);
+			}
+		}
+		
 		instance = null;
 	}
 	

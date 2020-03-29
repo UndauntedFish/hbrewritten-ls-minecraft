@@ -58,6 +58,7 @@ public class HerobrinePassListener implements Listener
 					{
 						applyHBPass(player);
 					}
+			    	player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
 				}
 			}
 		}
@@ -65,7 +66,7 @@ public class HerobrinePassListener implements Listener
 	}
 	
 	// Checks if the player is already herobrine.
-	private boolean isHerobrine(Player player)
+	public static boolean isHerobrine(Player player)
 	{
 		boolean isHerobrine = false;
 		
@@ -91,7 +92,7 @@ public class HerobrinePassListener implements Listener
 	}
 	
 	// Marks the player to be herobrine for next round, and deducts passcost from the player's token amount.
-	public void applyHBPass(Player player)
+	public static void applyHBPass(Player player)
 	{
 		int passCost = Main.getInstance().getConfig().getInt("passcost");
 		int currentTokens = getTokens(player);
@@ -130,11 +131,10 @@ public class HerobrinePassListener implements Listener
 		}
 		
 		player.sendMessage(ChatColor.GOLD + "Pass purchased! You will now be the Herobrine >:D");
-    	player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
 	}
 	
 	// Unmarks the player as herobrine for next round, and refunds passcost to the player's token amount.
-	public void removeHBPass(Player player)
+	public static void removeHBPass(Player player)
 	{
 		int passCost = Main.getInstance().getConfig().getInt("passcost");
 		
@@ -166,7 +166,7 @@ public class HerobrinePassListener implements Listener
 	}
 	// Gets the amount of tokens a player has
 	
-	private int getTokens(Player player)
+	private static int getTokens(Player player)
 	{
 		int tokens = -1; // Tokens should never actually be -1, this is basically a "null" initialization
 		
