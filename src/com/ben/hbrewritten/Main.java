@@ -44,7 +44,8 @@ public class Main extends JavaPlugin
         Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        
+        Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
+
         // Commands
         getCommand("points").setExecutor(new PointsCommand());
 	}

@@ -4,6 +4,10 @@ time: 30.0
 # Destination gameserver name (which is the server players will be sent to once the lobby timer reaches 0)
 gameserver: HBR01
 
+# Cost of a Herobrine Pass in tokens (default is 1000 tokens)
+passcost: 1000
+
+
 # Database setup
 host: localhost
 port: 3306

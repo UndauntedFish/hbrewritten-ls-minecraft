@@ -20,7 +20,7 @@ public class RankManager implements Listener
 		Rank rank = getRankFromPoints(points);
 		
 		String displayName = player.getName(); // Change to getName() if this is causing duplicate rank prefixes.
-		player.setDisplayName(rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
+		player.setDisplayName(ChatColor.YELLOW + "" + points + "" + ChatColor.RESET  + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
 	}
 	
 	// Assigns a player a rank, without updating the database. Will reset if they relog. Used by PointsCommand.
