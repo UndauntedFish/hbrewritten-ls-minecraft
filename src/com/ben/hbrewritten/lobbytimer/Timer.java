@@ -20,7 +20,6 @@ public class Timer
 	// Starts the timer. Returns TRUE if the timer is finished. FALSE if it never finishes.
 	public void startTimer()
 	{
-		timerStarted = true;
 		bossbar = Bukkit.createBossBar(null, BarColor.GREEN, BarStyle.SOLID);
 		time = Main.getInstance().getConfig().getDouble("time");
 		
@@ -28,8 +27,8 @@ public class Timer
 		{
 			return;
 		}
-		
-		// runnable counter
+				
+		// runnable iteration counter
 		AtomicInteger currentIteration = new AtomicInteger(1);
 		AtomicInteger processID = new AtomicInteger();
 		int maxIterations = (int) time - 1; // 59 for 60s, 29 for 30s, etc.
@@ -93,8 +92,8 @@ public class Timer
 	/*
 	 *  Sends all players to the gameserver.
 	 *  
-	 *  Players must have:
-	 *   - 
+	 *  
+	 *   
 	 */
 	private void sendPlayersToGame()
 	{

@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import com.ben.hbrewritten.GUIs.InventoryClickListener;
 import com.ben.hbrewritten.GUIs.RightclickListener;
@@ -14,8 +15,10 @@ import com.ben.hbrewritten.database.Database;
 import com.ben.hbrewritten.listeners.PlayerJoinListener;
 import com.ben.hbrewritten.listeners.PlayerLeaveListener;
 import com.ben.hbrewritten.lobbytimer.Timer;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
 
-public class Main extends JavaPlugin
+public class Main extends JavaPlugin implements PluginMessageListener
 {
 	// Instance of this main class used throughout all classes. Accessed via Main.getInstance().
 	private static Main instance;
@@ -52,6 +55,10 @@ public class Main extends JavaPlugin
 
         // Commands
         getCommand("points").setExecutor(new PointsCommand());
+        
+        // Bungee plugin messaging channel setup
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 	}
 	
 	@Override
@@ -105,6 +112,18 @@ public class Main extends JavaPlugin
             e.printStackTrace();
         }
     }
+	
+	// Bungee Messaging Channel Setup
+	public void onPluginMessageReceived(String channel, Player player, byte[] message)
+	{
+		if (!channel.equals("BungeeCord"))
+		{
+			return;
+		}
+		
+		ByteArrayDataInput in = ByteStreams.newDataInput(message);
+		String subChannel = in.readUTF();
+	}
 	
 	// Gets an instance of the Main class to be used by other classes.
 	public static Main getInstance()
