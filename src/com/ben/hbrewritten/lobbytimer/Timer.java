@@ -12,19 +12,17 @@ import com.ben.hbrewritten.Main;
 
 public class Timer
 {
-	private BossBar bossbar;
-	private double time; // in seconds
+	private BossBar bossbar = Bukkit.createBossBar(null, BarColor.GREEN, BarStyle.SOLID);
+	private double time = Main.getInstance().getConfig().getDouble("time"); // in seconds
 	private boolean timerStarted = false;
 	
 	
 	// Starts the timer. Returns TRUE if the timer is finished. FALSE if it never finishes.
 	public void startTimer()
-	{
-		bossbar = Bukkit.createBossBar(null, BarColor.GREEN, BarStyle.SOLID);
-		time = Main.getInstance().getConfig().getDouble("time");
-		
-		if (time <= 0.0 || bossbar.equals(null))
+	{	
+		if (time <= 0.0)
 		{
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[HBR] The timer's duration (as set in the config), must be greater than 0.0!");
 			return;
 		}
 				

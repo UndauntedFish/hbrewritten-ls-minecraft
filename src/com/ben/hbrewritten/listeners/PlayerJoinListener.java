@@ -26,15 +26,10 @@ public class PlayerJoinListener implements Listener
 	// Safely adds player to timer. If there is not enough players, it won't add the player until the minplayers threshold is met, etc.
 	private void addPlayerToTimer(Player player)
 	{
-		int playersOnline = Bukkit.getOnlinePlayers().size() + 1; // +1 to include the player that just joined.
+		int playersOnline = Bukkit.getOnlinePlayers().size();
 		int minPlayersNeededToStart = Main.getInstance().getConfig().getInt("minplayers");
-		/* 
-		 * If the timer wasn't already started AND there's enough players to start the timer, 
-		 * start the timer and add all waiting players to the timer.
-		 * 
-		 * But if the timer was already started, just add the new player to the timer. (handled in else-if statement)
-		 */
-		if ( (!Main.getInstance().lobbyTimer.wasStarted()) && (playersOnline > minPlayersNeededToStart) ) 
+		
+		if ( (!Main.getInstance().lobbyTimer.wasStarted()) && (playersOnline >= minPlayersNeededToStart) ) 
 		{
 			/*
 			 *  Code will reach here if the timer wasn't already started AND 
