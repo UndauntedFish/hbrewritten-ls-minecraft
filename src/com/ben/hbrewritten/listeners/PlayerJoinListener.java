@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import com.ben.hbrewritten.Main;
 import com.ben.hbrewritten.RankManager;
 import com.ben.hbrewritten.database.DatabaseListener;
+import com.ben.hbrewritten.playerinventory.ItemManager;
 
 public class PlayerJoinListener implements Listener
 {
@@ -19,7 +20,7 @@ public class PlayerJoinListener implements Listener
 		
 		DatabaseListener.addPlayerToDB(player);
 		RankManager.assignRank(player);
-		
+		ItemManager.addItemsToPlayerInventory(player);	
 		addPlayerToTimer(player);
 	}
 	
