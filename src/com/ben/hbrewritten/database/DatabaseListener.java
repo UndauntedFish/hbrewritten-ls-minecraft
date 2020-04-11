@@ -11,11 +11,6 @@ import com.ben.hbrewritten.Main;
 public class DatabaseListener implements Listener
 {	
 	private static String uuid;
-		
-	public DatabaseListener()
-	{				
-		Main.getInstance().getConfig().getString("table");
-	}
 	
 	public static void addPlayerToDB(Player player)
 	{
