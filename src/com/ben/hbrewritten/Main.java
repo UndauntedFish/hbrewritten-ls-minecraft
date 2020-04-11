@@ -3,6 +3,8 @@ package com.ben.hbrewritten;
 import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
+import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -12,6 +14,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.ben.hbrewritten.GUIs.InventoryClickListener;
 import com.ben.hbrewritten.GUIs.RightclickListener;
 import com.ben.hbrewritten.database.Database;
+import com.ben.hbrewritten.listeners.MiscListener;
 import com.ben.hbrewritten.listeners.PlayerJoinListener;
 import com.ben.hbrewritten.listeners.PlayerLeaveListener;
 import com.ben.hbrewritten.lobbytimer.Timer;
@@ -51,7 +54,7 @@ public class Main extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
-
+        Bukkit.getPluginManager().registerEvents(new MiscListener(), this);
 
         // Commands
         getCommand("points").setExecutor(new PointsCommand());
@@ -59,6 +62,9 @@ public class Main extends JavaPlugin implements PluginMessageListener
         // Bungee plugin messaging channel setup
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        
+        Bukkit.getServer().setDefaultGameMode(GameMode.ADVENTURE);
+        Bukkit.getWorld(this.getConfig().getString("lobbyworldname")).setDifficulty(Difficulty.PEACEFUL);
 	}
 	
 	@Override
