@@ -1,3 +1,6 @@
+# Default lobby world name
+lobbyworldname: LOB01
+
 # Lobby HUD Countdown timer (in seconds)
 time: 30.0
 
