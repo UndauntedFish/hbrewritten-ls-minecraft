@@ -17,7 +17,7 @@ public class RankManager implements Listener
 	public static void assignRank(Player player)
 	{
 		int points = getPointsFromDB(player);
-		Rank rank = getRankFromPoints(points);
+		Rank rank = Rank.setRankFromPoints(points);
 		
 		String displayName = player.getName(); // Change to getName() if this is causing duplicate rank prefixes.
 		player.setDisplayName(ChatColor.YELLOW + "" + points + "" + ChatColor.RESET  + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
@@ -26,28 +26,10 @@ public class RankManager implements Listener
 	// Assigns a player a rank, without updating the database. Will reset if they relog. Used by PointsCommand.
 	public static void assignTempRank(Player player, int points)
 	{
-		Rank rank = getRankFromPoints(points);
+		Rank rank = Rank.setRankFromPoints(points);
 		
 		String displayName = player.getName(); // Change to getName() if this is causing duplicate rank prefixes.
 		player.setDisplayName(rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
-	}
-	
-	// Converts a player's points to their respective rank
-	private static Rank getRankFromPoints(int points)
-	{
-		if (points == -1)
-		{
-			return Rank.DEATHBRINGER;
-		}
-		
-		for (Rank r : Rank.values())
-		{
-			if (points <= r.getPointsRequired())
-			{
-				return r;
-			}
-		}
-		return null;
 	}
 	
 	// Should be called in a PlayerJoinListener to load up all player's ranks as they join the server.

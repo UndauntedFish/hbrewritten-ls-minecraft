@@ -63,6 +63,7 @@ public class Main extends JavaPlugin implements PluginMessageListener
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
         
+        // Default gamemode of the lobby is adventure mode, and all
         Bukkit.getServer().setDefaultGameMode(GameMode.ADVENTURE);
         Bukkit.getWorld(this.getConfig().getString("lobbyworldname")).setDifficulty(Difficulty.PEACEFUL);
 	}
