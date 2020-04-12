@@ -19,7 +19,7 @@ public class InventoryClickListener implements Listener
 		Player player = (Player) e.getWhoClicked();
 
         // If opened GUI's title is equal to that of our GUI, don't let the player take any items from there
-        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).equals("Please select a class:"))
+        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).equals("Pick your class"))
         {
             if (e.getCurrentItem() != null)
             {

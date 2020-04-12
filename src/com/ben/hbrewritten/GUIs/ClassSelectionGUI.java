@@ -34,7 +34,7 @@ public class ClassSelectionGUI
 	public static void apply(Player player)
 	{
 		/* BEGINNING */
-		Inventory gui = Bukkit.createInventory(null, 18, "Please select a class:");
+		Inventory gui = Bukkit.createInventory(null, 18, "Pick your class");
 		
 		/* LORES */
 		
