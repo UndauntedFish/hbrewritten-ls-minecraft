@@ -14,6 +14,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.ben.hbrewritten.GUIs.InventoryClickListener;
 import com.ben.hbrewritten.GUIs.RightclickListener;
 import com.ben.hbrewritten.database.Database;
+import com.ben.hbrewritten.listeners.CustomChatFormatListener;
 import com.ben.hbrewritten.listeners.MiscListener;
 import com.ben.hbrewritten.listeners.PlayerJoinListener;
 import com.ben.hbrewritten.listeners.PlayerLeaveListener;
@@ -55,6 +56,7 @@ public class Main extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
         Bukkit.getPluginManager().registerEvents(new MiscListener(), this);
+        Bukkit.getPluginManager().registerEvents(new CustomChatFormatListener(), this);
 
         // Commands
         getCommand("points").setExecutor(new PointsCommand());

@@ -42,7 +42,7 @@ public enum Rank
 	
 	public String getDisplayName()
 	{
-		return DISPLAYNAME;
+		return DISPLAYNAME + ChatColor.RESET;
 	}
 	
 	public static Rank setRankFromPoints(int points)
