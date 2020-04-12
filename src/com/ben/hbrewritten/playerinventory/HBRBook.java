@@ -23,7 +23,7 @@ public class HBRBook
 			"HBR is still unreleased, so things may get buggy. Hang tight!",
 			
 			ChatColor.BLACK + "" + ChatColor.BOLD + "Legal:\n\n" + ChatColor.RESET + "" + ChatColor.BLUE + 
-			"HBR is an independent recreation of The Hive and it is not affiliated with The Hive, Herobrine, or Herobrine V2.\n\n" + 
+			"HBR is an independent recreation of TheHerobrine and it is not affiliated with The Hive, TheHerobrine, or TheHerobrine V2.\n\n" + 
 			"HBR was rewritten as an educational instance. We do not hold copyright for any of the files."
 		);
 		
