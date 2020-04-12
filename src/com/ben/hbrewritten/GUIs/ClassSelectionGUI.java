@@ -48,15 +48,15 @@ public class ClassSelectionGUI
 		}
 		
 		/* ITEM SETTING */
-		gui.setItem(2, scout);
-		gui.setItem(3, archer);
-		gui.setItem(4, priest);
+		gui.setItem(2, archer);
+		gui.setItem(3, priest);
+		gui.setItem(4, scout);
 		gui.setItem(5, wizard);
 		gui.setItem(6, demo);
 		
 		gui.setItem(12, mage);
-		gui.setItem(13, sorceror);
-		gui.setItem(14, paladin);
+		gui.setItem(13, paladin);
+		gui.setItem(14, sorceror);
 		
 		// FINAL
         player.openInventory(gui);
@@ -165,28 +165,28 @@ public class ClassSelectionGUI
 	 */
 	public static void loadDefaultState()
 	{
-		scout = new ItemStack(Material.LEATHER_HELMET);
-		scoutMeta = (LeatherArmorMeta) scout.getItemMeta();
-		scoutMeta.setDisplayName("Scout");
-		scoutMeta.setColor(Color.YELLOW);
-		scout.setItemMeta(scoutMeta);
-		
 		archer = new ItemStack(Material.LEATHER_HELMET);
 		archerMeta = (LeatherArmorMeta) archer.getItemMeta();
 		archerMeta.setDisplayName("Archer");
-		archerMeta.setColor(Color.GREEN);
+		archerMeta.setColor(Color.fromRGB(102, 127, 51));
 		archer.setItemMeta(archerMeta);
-
+		
 		priest = new ItemStack(Material.LEATHER_HELMET);
 		priestMeta = (LeatherArmorMeta) priest.getItemMeta();
 		priestMeta.setDisplayName("Priest");
-		priestMeta.setColor(Color.SILVER);
+		priestMeta.setColor(Color.fromRGB(255, 255, 255));
 		priest.setItemMeta(priestMeta);
+		
+		scout = new ItemStack(Material.LEATHER_HELMET);
+		scoutMeta = (LeatherArmorMeta) scout.getItemMeta();
+		scoutMeta.setDisplayName("Scout");
+		scoutMeta.setColor(Color.fromRGB(229, 229, 51));
+		scout.setItemMeta(scoutMeta);
 
 		wizard = new ItemStack(Material.LEATHER_HELMET);
 		wizardMeta = (LeatherArmorMeta) wizard.getItemMeta();
 		wizardMeta.setDisplayName("Wizard");
-		wizardMeta.setColor(Color.FUCHSIA);
+		wizardMeta.setColor(Color.fromRGB(127, 63, 178));
 		wizard.setItemMeta(wizardMeta);
 
 		demo = new ItemStack(Material.LEATHER_HELMET);
@@ -198,19 +198,19 @@ public class ClassSelectionGUI
 		mage = new ItemStack(Material.LEATHER_HELMET);
 		mageMeta = (LeatherArmorMeta) mage.getItemMeta();
 		mageMeta.setDisplayName("Mage");
-		mageMeta.setColor(Color.fromRGB(173, 216, 230)); // Light blue #add8e6
+		mageMeta.setColor(Color.fromRGB(102, 153, 216));
 		mage.setItemMeta(mageMeta);
 		
 		paladin = new ItemStack(Material.LEATHER_HELMET);
 		paladinMeta = (LeatherArmorMeta) paladin.getItemMeta();
 		paladinMeta.setDisplayName("Paladin");
-		paladinMeta.setColor(Color.ORANGE);
+		paladinMeta.setColor(Color.fromRGB(216, 127, 51));
 		paladin.setItemMeta(paladinMeta);
 		
 		sorceror = new ItemStack(Material.LEATHER_HELMET);
 		sorcerorMeta = (LeatherArmorMeta) sorceror.getItemMeta();
 		sorcerorMeta.setDisplayName("Sorceror");
-		sorcerorMeta.setColor(Color.RED);
+		sorcerorMeta.setColor(Color.fromRGB(153, 51, 51));
 		sorceror.setItemMeta(sorcerorMeta);
 	}
 }
