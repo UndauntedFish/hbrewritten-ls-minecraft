@@ -1,6 +1,7 @@
 package com.ben.hbrewritten;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -26,6 +27,9 @@ public class Main extends JavaPlugin implements PluginMessageListener
 {
 	// Instance of this main class used throughout all classes. Accessed via Main.getInstance().
 	private static Main instance;
+	
+	// List of all players who join, pulls commonly used data from the db and stores it for each player.
+	public ArrayList<PlayerData> playerData = new ArrayList<>();
 	
 	// Key used in com.ben.hbrewritten.GUIs.ClassSelectionGUI to enable enchantment glows.
 	public NamespacedKey key = new NamespacedKey(this, getDescription().getName());

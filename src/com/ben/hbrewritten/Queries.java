@@ -11,31 +11,8 @@ import org.bukkit.event.Listener;
 
 import com.ben.hbrewritten.enums.Rank;
 
-public class RankManager implements Listener
+public class Queries implements Listener
 {
-	// Assigns a player a rank, which is determined by the amount of points they have.
-	public static void assignRank(Player player)
-	{
-		int points = getPointsFromDB(player);
-		Rank rank = Rank.setRankFromPoints(points);
-		
-		/*
-		String displayName = player.getName(); // Change to getName() if this is causing duplicate rank prefixes.
-		player.setDisplayName(ChatColor.YELLOW + "" + points + "" + ChatColor.RESET  + "" + ChatColor.GRAY + " | " + ChatColor.RESET + "" + rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
-		*/
-	}
-	
-	// Assigns a player a rank, without updating the database. Will reset if they relog. Used by PointsCommand.
-	public static void assignTempRank(Player player, int points)
-	{
-		Rank rank = Rank.setRankFromPoints(points);
-		
-		/*
-		String displayName = player.getName(); // Change to getName() if this is causing duplicate rank prefixes.
-		player.setDisplayName(rank.getDisplayName() + "" + ChatColor.RESET + " " + displayName);
-		*/
-	}
-	
 	// Should be called in a PlayerJoinListener to load up all player's ranks as they join the server.
 	public static int getPointsFromDB(Player player)
 	{

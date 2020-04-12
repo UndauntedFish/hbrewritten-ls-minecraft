@@ -7,7 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.ben.hbrewritten.Main;
-import com.ben.hbrewritten.RankManager;
+import com.ben.hbrewritten.PlayerData;
+import com.ben.hbrewritten.Queries;
 import com.ben.hbrewritten.database.DatabaseListener;
 import com.ben.hbrewritten.playerinventory.ItemManager;
 
@@ -17,9 +18,10 @@ public class PlayerJoinListener implements Listener
 	public void onJoin(PlayerJoinEvent e)
 	{
 		Player player = e.getPlayer();
+		PlayerData playerData = new PlayerData(player);
+		Main.getInstance().playerData.add(playerData);
 		
 		DatabaseListener.addPlayerToDB(player);
-		RankManager.assignRank(player);
 		ItemManager.addItemsToPlayerInventory(player);	
 		addPlayerToTimer(player);
 	}

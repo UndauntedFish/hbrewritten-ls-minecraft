@@ -52,11 +52,11 @@ public class PointsCommand implements CommandExecutor
 		if (args[0].equalsIgnoreCase("set"))
 		{
 			int pointsToSet = Integer.parseInt(args[2]);
-			RankManager.assignTempRank(targetPlayer, pointsToSet);
+			//Queries.assignTempRank(targetPlayer, pointsToSet);
 		}
 		else if (args[0].equalsIgnoreCase("revert"))
 		{
-			RankManager.assignRank(targetPlayer);
+			//Queries.assignRank(targetPlayer);
 		}
 		
 		return false;
