@@ -18,7 +18,7 @@ public class RuleBook
 		ruleBookMeta.setTitle(ChatColor.YELLOW + "The Rules");
 		ruleBookMeta.setAuthor("UndauntedPhish");
 		ruleBookMeta.addPage(
-				ChatColor.BOLD + "Rules\n\n" + ChatColor.RESET + "" + ChatColor.BLUE + 
+				ChatColor.BOLD + "Rules\n\n" + ChatColor.RESET + "" + ChatColor.DARK_BLUE + 
 				"1) Respect others\n2) Don't hack!\n3) Don't abuse glitches!\n4) Don't 'camp' the shard!"
 		);
 		
