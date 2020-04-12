@@ -28,7 +28,6 @@ public class InventoryClickListener implements Listener
             else
             {
             	// This makes sure that no error is thrown if the player selects an empty slot in the GUI
-                Color.AQUA.asRGB();
             	return;
             }
             
