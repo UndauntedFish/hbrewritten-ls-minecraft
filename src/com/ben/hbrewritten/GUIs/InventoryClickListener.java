@@ -34,7 +34,7 @@ public class InventoryClickListener implements Listener
             // Send the player a chat message/ding sound confirming them of their selected class.
             ItemStack clickedItem = e.getCurrentItem();
             LeatherArmorMeta clickedItemMeta = (LeatherArmorMeta) clickedItem.getItemMeta();
-            String clickedItemName = clickedItemMeta.getDisplayName();
+            String clickedItemName = ChatColor.stripColor(clickedItemMeta.getDisplayName());
             
             // If the player is already the class they selected, do nothing.
             // If the player chose a new class, update that info in the db.
