@@ -19,6 +19,7 @@ import com.ben.hbrewritten.listeners.CustomChatFormatListener;
 import com.ben.hbrewritten.listeners.MiscListener;
 import com.ben.hbrewritten.listeners.PlayerJoinListener;
 import com.ben.hbrewritten.listeners.PlayerLeaveListener;
+import com.ben.hbrewritten.listeners.PluginMessage;
 import com.ben.hbrewritten.lobbytimer.Timer;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
@@ -62,16 +63,13 @@ public class Main extends JavaPlugin implements PluginMessageListener
         Bukkit.getPluginManager().registerEvents(new MiscListener(), this);
         Bukkit.getPluginManager().registerEvents(new CustomChatFormatListener(), this);
 
+
         // Commands
         getCommand("points").setExecutor(new PointsCommand());
         
         // Bungee plugin messaging channel setup
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        
-        // Default gamemode of the lobby is adventure mode, and all
-        Bukkit.getServer().setDefaultGameMode(GameMode.ADVENTURE);
-        Bukkit.getWorld(this.getConfig().getString("lobbyworldname")).setDifficulty(Difficulty.PEACEFUL);
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PluginMessage());
 	}
 	
 	@Override

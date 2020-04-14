@@ -32,4 +32,16 @@ public class PlayerData
 	{
 		return rank;
 	}
+	
+	public static PlayerData getPlayerData(Player player)
+	{
+		for (PlayerData pd : Main.getInstance().playerData)
+		{
+			if (pd.getPlayer().equals(player))
+			{
+				return pd;
+			}
+		}
+		return null;
+	}
 }

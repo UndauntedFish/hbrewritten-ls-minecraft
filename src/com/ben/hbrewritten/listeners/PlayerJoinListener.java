@@ -12,18 +12,22 @@ import com.ben.hbrewritten.Queries;
 import com.ben.hbrewritten.database.DatabaseListener;
 import com.ben.hbrewritten.playerinventory.ItemManager;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class PlayerJoinListener implements Listener
 {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e)
-	{
+	{		
 		Player player = e.getPlayer();
-		PlayerData playerData = new PlayerData(player);
-		Main.getInstance().playerData.add(playerData);
+		e.setJoinMessage(ChatColor.GOLD.toString() + player.getName() + ChatColor.RESET + " is redy for some herby.");
 		
 		DatabaseListener.addPlayerToDB(player);
 		ItemManager.addItemsToPlayerInventory(player);	
 		addPlayerToTimer(player);
+		
+		PlayerData playerData = new PlayerData(player);
+		Main.getInstance().playerData.add(playerData);
 	}
 	
 	// Safely adds player to timer. If there is not enough players, it won't add the player until the minplayers threshold is met, etc.

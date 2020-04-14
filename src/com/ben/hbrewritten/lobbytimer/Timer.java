@@ -9,6 +9,8 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 
 import com.ben.hbrewritten.Main;
+import com.ben.hbrewritten.PlayerData;
+import com.ben.hbrewritten.listeners.PluginMessage;
 
 public class Timer
 {
@@ -95,8 +97,12 @@ public class Timer
 	 */
 	private void sendPlayersToGame()
 	{
+		String gameServer = Main.getInstance().getConfig().getString("gameserver");
 		
-		
+		for (PlayerData pd : Main.getInstance().playerData)
+		{
+			PluginMessage.connect(pd.getPlayer(), gameServer);
+		}
 	}
 	
 	public BossBar getTimer()
