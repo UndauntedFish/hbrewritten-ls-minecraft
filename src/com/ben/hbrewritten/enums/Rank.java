@@ -63,6 +63,10 @@ public enum Rank
 				{
 					return ranks[i];
 				}
+				else
+				{
+					return Rank.DIVINE;
+				}
 			}
 			else
 			{
