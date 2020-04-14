@@ -193,7 +193,7 @@ public class ClassSelectionGUI
 		demo = new ItemStack(Material.LEATHER_HELMET);
 		demoMeta = (LeatherArmorMeta) demo.getItemMeta();
 		demoMeta.setDisplayName(ChatColor.WHITE + "Demo");
-		demoMeta.setColor(Color.WHITE);
+		demoMeta.setColor(Color.BLACK);
 		demo.setItemMeta(demoMeta);
 
 		mage = new ItemStack(Material.LEATHER_HELMET);
