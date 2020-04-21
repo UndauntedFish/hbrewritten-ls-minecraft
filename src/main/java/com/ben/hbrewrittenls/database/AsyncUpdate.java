@@ -93,6 +93,8 @@ public class AsyncUpdate
         {
             e.printStackTrace();
         }
+
+        hikari.close();
         return updateResult;
     }
 }

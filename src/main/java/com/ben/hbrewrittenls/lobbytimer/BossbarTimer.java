@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Timer
+public class BossbarTimer
 {
 	private BossBar bossbar = Bukkit.createBossBar(null, BarColor.GREEN, BarStyle.SOLID);
 	private double time = Main.getInstance().getConfig().getDouble("time"); // in seconds

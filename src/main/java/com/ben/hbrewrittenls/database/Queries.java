@@ -124,7 +124,7 @@ public class Queries
         int passTokenCost = Main.getInstance().getConfig().getInt("passcost");
 
         // Adds back (refunds) passTokenCost to the player's token balance.
-        AsyncUpdate update1 = AsyncUpdate(Main.getInstance().getHikari(), addTokens);
+        AsyncUpdate update1 = new AsyncUpdate(Main.getInstance().getHikari(), addTokens);
         update1.setString(1, Integer.toString(passTokenCost));
         update1.setString(2, uuid.toString());
         update1.execute();
@@ -201,9 +201,16 @@ public class Queries
     // Sets the player's active class to whatever is specified in the myClass arg of this method.
     public static void setActiveClass(UUID uuid, String myClass)
     {
-        AsyncUpdate update = new AsyncUpdate(Main.getInstance().getHikari(), setActiveClass);
-        update.setString(1, myClass);
-        update.setString(2, uuid.toString());
+        SyncUpdate update = new SyncUpdate(setActiveClass);
+        try
+        {
+            update.preparedStatement.setString(1, myClass);
+            update.preparedStatement.setString(2, uuid.toString());
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         update.execute();
     }
 

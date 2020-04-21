@@ -1,8 +1,7 @@
 package com.ben.hbrewrittenls.listeners;
 
-import com.ben.hbrewritten.playerinventory.ItemManager;
 import com.ben.hbrewrittenls.Main;
-import net.md_5.bungee.api.ChatColor;
+import com.ben.hbrewrittenls.inventoryitems.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,7 @@ public class PlayerJoinListener implements Listener
 	public void onJoin(PlayerJoinEvent e)
 	{		
 		Player player = e.getPlayer();
-		e.setJoinMessage(ChatColor.GOLD.toString() + player.getName() + ChatColor.RESET + " is redy for some herby.");
+		e.setJoinMessage(null);
 		
 		ItemManager.addItemsToPlayerInventory(player);
 		addPlayerToTimer(player);

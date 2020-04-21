@@ -23,7 +23,6 @@ public class PluginMessage implements PluginMessageListener, Listener
 	}
 	
 	// Sends specified player from their current server to another specified server.
-	@SuppressWarnings("unlikely-arg-type")
 	public static void connect(Player player, String server)
 	{
 		ByteArrayDataOutput output = ByteStreams.newDataOutput();

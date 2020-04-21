@@ -2,13 +2,16 @@ package com.ben.hbrewrittenls;
 
 import com.ben.hbrewrittenls.GUIs.InventoryClickListener;
 import com.ben.hbrewrittenls.GUIs.RightclickListener;
-import com.ben.hbrewrittenls.listeners.AsyncPlayerDataLoader;
-import com.ben.hbrewrittenls.listeners.CustomChatFormatListener;
+import com.ben.hbrewrittenls.database.BaseFields;
+import com.ben.hbrewrittenls.listeners.*;
+import com.ben.hbrewrittenls.lobbytimer.BossbarTimer;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -27,6 +30,8 @@ public class Main extends JavaPlugin
     private String host, database, username, password;
     private int port;
 
+    // Lobby timer. Accessed by the PlayerJoinListener to add players to the bossbar timer.
+    public BossbarTimer lobbyTimer;
 
     @Override
     public void onEnable()
@@ -48,12 +53,27 @@ public class Main extends JavaPlugin
         hikari.addDataSourceProperty("databaseName", database);
         hikari.addDataSourceProperty("user", username);
         hikari.addDataSourceProperty("password", password);
+        try
+        {
+            BaseFields.connection = this.hikari.getConnection();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        // Lobbytimer
+        lobbyTimer = new BossbarTimer();
 
         // EventHandlers
         Bukkit.getPluginManager().registerEvents(new AsyncPlayerDataLoader(), this);
         Bukkit.getPluginManager().registerEvents(new CustomChatFormatListener(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
         Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
+        Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
+
     }
 
     @Override
