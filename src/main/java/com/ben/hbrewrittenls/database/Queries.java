@@ -2,12 +2,8 @@ package com.ben.hbrewrittenls.database;
 
 import com.ben.hbrewrittenls.Main;
 import com.ben.hbrewrittenls.PlayerData;
-import com.ben.hbrewrittenls.enums.ClassData;
-import com.ben.hbrewrittenls.enums.ColorUtils;
-import com.ben.hbrewrittenls.enums.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
@@ -66,7 +62,7 @@ public class Queries
     // Gets the player's current amount of tokens from the database
     public static int getTokens(UUID uuid)
     {
-        AsyncQuery query = new AsyncQuery(Main.getInstance().getHikari(), getTokens);
+        AsyncQuery query = new AsyncQuery(getTokens);
         query.setString(1, uuid.toString());
         ResultSet rs = query.execute();
         try
@@ -142,7 +138,7 @@ public class Queries
     // If it is true, that means the user used a herobrine pass.
     public static boolean isHerobrine(UUID uuid)
     {
-        AsyncQuery query = new AsyncQuery(Main.getInstance().getHikari(), isHerobrine);
+        AsyncQuery query = new AsyncQuery(isHerobrine);
         query.setString(1, uuid.toString());
         ResultSet rs = query.execute();
         try
@@ -161,7 +157,7 @@ public class Queries
     // Gets the player's current amount of points from the database
     public static int getPoints(UUID uuid)
     {
-        AsyncQuery query = new AsyncQuery(Main.getInstance().getHikari(), getPoints);
+        AsyncQuery query = new AsyncQuery(getPoints);
         query.setString(1, uuid.toString());
         ResultSet rs = query.execute();
         try
@@ -181,7 +177,7 @@ public class Queries
     // Gets the player's current active class from the database.
     public static String getActiveClass(UUID uuid)
     {
-        AsyncQuery query = new AsyncQuery(Main.getInstance().getHikari(), getActiveClass);
+        AsyncQuery query = new AsyncQuery(getActiveClass);
         query.setString(1, uuid.toString());
         ResultSet rs = query.execute();
         try
@@ -211,7 +207,7 @@ public class Queries
     public static void safeAddPlayerToDB(UUID uuid)
     {
         // Checks how many times the player appears in the database.
-        AsyncQuery query = new AsyncQuery(Main.getInstance().getHikari(), numOccurences);
+        AsyncQuery query = new AsyncQuery(numOccurences);
         query.setString(1, uuid.toString());
         ResultSet rs = query.execute();
         try
