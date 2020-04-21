@@ -5,13 +5,11 @@ import org.bukkit.ChatColor;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 public class SyncUpdate extends BaseFields
 {
-    public PreparedStatement preparedStatement;
+    private PreparedStatement preparedStatement;
     private String sql;
-    private HashMap<Integer, String> sqlArgs;
 
     private int result;
 
@@ -30,7 +28,6 @@ public class SyncUpdate extends BaseFields
         }
 
         this.sql = sql;
-        this.sqlArgs = new HashMap<>();
         try
         {
             this.preparedStatement = connection.prepareStatement(sql);

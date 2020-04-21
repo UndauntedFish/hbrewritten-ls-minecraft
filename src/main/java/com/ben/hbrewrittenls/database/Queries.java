@@ -101,7 +101,7 @@ public class Queries
         }
 
         // Deducts passTokenCost from the player's token balance.
-        AsyncUpdate update1 = new AsyncUpdate(Main.getInstance().getHikari(), safeRemoveTokens);
+        AsyncUpdate update1 = new AsyncUpdate(safeRemoveTokens);
         update1.setString(1, Integer.toString(passTokenCost));
         update1.setString(2, uuid.toString());
         update1.setString(3, Integer.toString(passTokenCost));
@@ -109,7 +109,7 @@ public class Queries
         pd.setTokens(pd.getTokens() - passTokenCost);
 
         // Sets is_herobrine to true for the player
-        AsyncUpdate update2 = new AsyncUpdate(Main.getInstance().getHikari(), setHerobrine);
+        AsyncUpdate update2 = new AsyncUpdate(setHerobrine);
         update2.setString(1, "true");
         update2.setString(2, uuid.toString());
         update2.execute();
@@ -124,14 +124,14 @@ public class Queries
         int passTokenCost = Main.getInstance().getConfig().getInt("passcost");
 
         // Adds back (refunds) passTokenCost to the player's token balance.
-        AsyncUpdate update1 = new AsyncUpdate(Main.getInstance().getHikari(), addTokens);
+        AsyncUpdate update1 = new AsyncUpdate(addTokens);
         update1.setString(1, Integer.toString(passTokenCost));
         update1.setString(2, uuid.toString());
         update1.execute();
         pd.setTokens(pd.getTokens() - passTokenCost);
 
         // Sets is_herobrine to false for the player
-        AsyncUpdate update2 = new AsyncUpdate(Main.getInstance().getHikari(), setHerobrine);
+        AsyncUpdate update2 = new AsyncUpdate(setHerobrine);
         update2.setString(1, "false");
         update2.setString(2, uuid.toString());
         update2.execute();
@@ -202,15 +202,8 @@ public class Queries
     public static void setActiveClass(UUID uuid, String myClass)
     {
         SyncUpdate update = new SyncUpdate(setActiveClass);
-        try
-        {
-            update.preparedStatement.setString(1, myClass);
-            update.preparedStatement.setString(2, uuid.toString());
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+        update.setString(1, myClass);
+        update.setString(2, uuid.toString());
         update.execute();
     }
 
@@ -238,17 +231,17 @@ public class Queries
         }
 
         // Adds the player to the player table
-        AsyncUpdate updatePlayer = new AsyncUpdate(Main.getInstance().getHikari(), insertIntoPlayer);
+        AsyncUpdate updatePlayer = new AsyncUpdate(insertIntoPlayer);
         updatePlayer.setString(1, uuid.toString());
         updatePlayer.execute();
 
         // Adds the player to the hbstats table
-        AsyncUpdate updateStats = new AsyncUpdate(Main.getInstance().getHikari(), insertIntoStats);
+        AsyncUpdate updateStats = new AsyncUpdate(insertIntoStats);
         updateStats.setString(1, uuid.toString());
         updateStats.execute();
 
         // Adds the player to the hb_prem_classes table
-        AsyncUpdate updatePrem = new AsyncUpdate(Main.getInstance().getHikari(), insertIntoPrem);
+        AsyncUpdate updatePrem = new AsyncUpdate(insertIntoPrem);
         updatePrem.setString(1, uuid.toString());
         updatePrem.execute();
     }
