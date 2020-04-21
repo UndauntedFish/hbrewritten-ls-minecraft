@@ -12,18 +12,16 @@ import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class AsyncQuery
+public class AsyncQuery extends BaseFields
 {
-    private HikariDataSource hikari;
-
+    private PreparedStatement preparedStatement;
     private String sql;
-    private ArrayList<String> sqlArgs;
 
     private CompletableFuture<ResultSet> result;
 
-    public AsyncQuery(HikariDataSource hikari, String sql) throws IllegalArgumentException
+    public AsyncQuery(String sql) throws IllegalArgumentException
     {
-        if (hikari.equals(null))
+        if (connection.equals(null))
         {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[HBRgs] ERROR: Null datasource input for AsyncQuery!");
             throw new IllegalArgumentException();
@@ -35,33 +33,28 @@ public class AsyncQuery
             throw new IllegalArgumentException();
         }
 
-        this.hikari = hikari;
         this.sql = sql;
-        this.sqlArgs = new ArrayList<>();
+        try
+        {
+            this.preparedStatement = connection.prepareStatement(sql);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
         this.result = new CompletableFuture<>();
     }
 
     public void setString(int index, String input)
     {
-        if (index < 1 || input.equals(null))
+        try
         {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[HBRgs] No preparedStatement arguments found in AsyncQuery!");
-            throw new IllegalArgumentException();
+            preparedStatement.setString(index, input);
         }
-        sqlArgs.add(index - 1, input);
-    }
-
-    private PreparedStatement generatePreparedStatement() throws SQLException
-    {
-        PreparedStatement ps = hikari.getConnection().prepareStatement(sql);
-
-        for (int i = 0; i < sqlArgs.size(); i++)
+        catch (SQLException e)
         {
-            ps.setString(i + 1, sqlArgs.remove(i));
+            e.printStackTrace();
         }
-        sqlArgs = null;
-
-        return ps;
     }
 
     // Executes the query. Will pause the class it got called in until the async task is done.
@@ -74,8 +67,7 @@ public class AsyncQuery
             {
                 try
                 {
-                    PreparedStatement ps = generatePreparedStatement();
-                    result.complete(ps.executeQuery());
+                    result.complete(preparedStatement.executeQuery());
                 }
                 catch (SQLException e)
                 {
