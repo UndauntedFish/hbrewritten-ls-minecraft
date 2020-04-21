@@ -1,20 +1,15 @@
 package com.ben.hbrewrittenls.GUIs;
 
-import com.ben.hbrewritten.EnchGlow;
-import com.ben.hbrewritten.Main;
+import com.ben.hbrewrittenls.EnchGlow;
 import com.ben.hbrewrittenls.Main;
+import com.ben.hbrewrittenls.PlayerData;
+import com.ben.hbrewrittenls.enums.ClassData;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ClassSelectionGUI
 {
@@ -34,6 +29,8 @@ public class ClassSelectionGUI
 	 */
 	public static void apply(Player player)
 	{
+		PlayerData pd = Main.getInstance().playerDataMap.get(player.getUniqueId());
+
 		/* BEGINNING */
 		Inventory gui = Bukkit.createInventory(null, 18, "Pick your class");
 		
@@ -41,11 +38,12 @@ public class ClassSelectionGUI
 		
 		/* ITEMSTACKS SETTING */
 		loadDefaultState();
-		
-		if (!getActiveClass(player).equals(null))
+
+		String activeClass = pd.getActiveClass();
+		if (!activeClass.equals(null))
 		{
 			// selected state: if a player already has a class active, mark it as selected. All else is deselected.
-			selectClass(getActiveClass(player)); // updates newly active class in the GUI
+			selectClass(activeClass); // updates newly active class in the GUI
 		}
 		
 		/* ITEM SETTING */
@@ -121,50 +119,50 @@ public class ClassSelectionGUI
 	{
 		archer = new ItemStack(Material.LEATHER_HELMET);
 		archerMeta = (LeatherArmorMeta) archer.getItemMeta();
-		archerMeta.setDisplayName(ChatColor.WHITE + "Archer");
-		archerMeta.setColor(Color.fromRGB(102, 127, 51));
+		archerMeta.setDisplayName(ClassData.ARCHER.getName());
+		archerMeta.setColor(ClassData.ARCHER.getHelmetColor());
 		archer.setItemMeta(archerMeta);
 		
 		priest = new ItemStack(Material.LEATHER_HELMET);
 		priestMeta = (LeatherArmorMeta) priest.getItemMeta();
-		priestMeta.setDisplayName(ChatColor.WHITE + "Priest");
-		priestMeta.setColor(Color.fromRGB(255, 255, 255));
+		priestMeta.setDisplayName(ClassData.PRIEST.getName());
+		priestMeta.setColor(ClassData.PRIEST.getHelmetColor());
 		priest.setItemMeta(priestMeta);
 		
 		scout = new ItemStack(Material.LEATHER_HELMET);
 		scoutMeta = (LeatherArmorMeta) scout.getItemMeta();
-		scoutMeta.setDisplayName(ChatColor.WHITE + "Scout");
-		scoutMeta.setColor(Color.fromRGB(229, 229, 51));
+		scoutMeta.setDisplayName(ClassData.SCOUT.getName());
+		scoutMeta.setColor(ClassData.SCOUT.getHelmetColor());
 		scout.setItemMeta(scoutMeta);
 
 		wizard = new ItemStack(Material.LEATHER_HELMET);
 		wizardMeta = (LeatherArmorMeta) wizard.getItemMeta();
-		wizardMeta.setDisplayName(ChatColor.WHITE + "Wizard");
-		wizardMeta.setColor(Color.fromRGB(127, 63, 178));
+		wizardMeta.setDisplayName(ClassData.WIZARD.getName());
+		wizardMeta.setColor(ClassData.WIZARD.getHelmetColor());
 		wizard.setItemMeta(wizardMeta);
 
 		demo = new ItemStack(Material.LEATHER_HELMET);
 		demoMeta = (LeatherArmorMeta) demo.getItemMeta();
-		demoMeta.setDisplayName(ChatColor.WHITE + "Demo");
-		demoMeta.setColor(Color.BLACK);
+		demoMeta.setDisplayName(ClassData.DEMO.getName());
+		demoMeta.setColor(ClassData.DEMO.getHelmetColor());
 		demo.setItemMeta(demoMeta);
 
 		mage = new ItemStack(Material.LEATHER_HELMET);
 		mageMeta = (LeatherArmorMeta) mage.getItemMeta();
-		mageMeta.setDisplayName(ChatColor.WHITE + "Mage");
-		mageMeta.setColor(Color.fromRGB(102, 153, 216));
+		mageMeta.setDisplayName(ClassData.MAGE.getName());
+		mageMeta.setColor(ClassData.MAGE.getHelmetColor());
 		mage.setItemMeta(mageMeta);
 		
 		paladin = new ItemStack(Material.LEATHER_HELMET);
 		paladinMeta = (LeatherArmorMeta) paladin.getItemMeta();
-		paladinMeta.setDisplayName(ChatColor.WHITE + "Paladin");
-		paladinMeta.setColor(Color.fromRGB(216, 127, 51));
+		paladinMeta.setDisplayName(ClassData.PALADIN.getName());
+		paladinMeta.setColor(ClassData.PALADIN.getHelmetColor());
 		paladin.setItemMeta(paladinMeta);
 		
 		sorceror = new ItemStack(Material.LEATHER_HELMET);
 		sorcerorMeta = (LeatherArmorMeta) sorceror.getItemMeta();
-		sorcerorMeta.setDisplayName(ChatColor.WHITE + "Sorceror");
-		sorcerorMeta.setColor(Color.fromRGB(153, 51, 51));
+		sorcerorMeta.setDisplayName(ClassData.SORCEROR.getName());
+		sorcerorMeta.setColor(ClassData.SORCEROR.getHelmetColor());
 		sorceror.setItemMeta(sorcerorMeta);
 	}
 }

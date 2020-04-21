@@ -1,6 +1,9 @@
 package com.ben.hbrewrittenls;
 
+import com.ben.hbrewrittenls.GUIs.InventoryClickListener;
+import com.ben.hbrewrittenls.GUIs.RightclickListener;
 import com.ben.hbrewrittenls.listeners.AsyncPlayerDataLoader;
+import com.ben.hbrewrittenls.listeners.CustomChatFormatListener;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -48,7 +51,9 @@ public class Main extends JavaPlugin
 
         // EventHandlers
         Bukkit.getPluginManager().registerEvents(new AsyncPlayerDataLoader(), this);
-
+        Bukkit.getPluginManager().registerEvents(new CustomChatFormatListener(), this);
+        Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
+        Bukkit.getPluginManager().registerEvents(new RightclickListener(), this);
     }
 
     @Override

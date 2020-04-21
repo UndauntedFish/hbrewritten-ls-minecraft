@@ -31,9 +31,13 @@ public class AsyncPlayerDataLoader implements Listener
         Queries.safeAddPlayerToDB(uuid);
 
         PlayerData pd = new PlayerData(uuid);
+
         int points = Queries.getPoints(uuid);
         pd.setPoints(points);
         pd.setRank(Rank.setRankFromPoints(points));
+
+        String activeClass = Queries.getActiveClass(uuid);
+        pd.setActiveClass(activeClass);
 
         if (Main.getInstance().playerDataMap.containsKey(uuid))
         {
@@ -45,18 +49,5 @@ public class AsyncPlayerDataLoader implements Listener
         }
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[HBRgs] Player data successfully loaded.");
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e)
-    {
-        Player player = e.getPlayer();
-        UUID uuid = player.getUniqueId();
-        PlayerData pd = Main.getInstance().playerDataMap.get(uuid);
-
-        //iwastesting
-        player.sendMessage("Your rank is " + pd.getRank().getDisplayName());
-        player.sendMessage("Your points are " + pd.getPoints());
-
     }
 }

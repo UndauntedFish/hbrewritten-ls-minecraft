@@ -11,6 +11,7 @@ public class PlayerData
 	private int points;
 	private Rank rank;
 	private boolean hasDataLoaded;
+	private String activeClass;
 	
 	public PlayerData(UUID uuid)
 	{
@@ -58,4 +59,15 @@ public class PlayerData
 	{
 		return hasDataLoaded;
 	}
+
+	public String getActiveClass()
+	{
+		return activeClass;
+	}
+
+	public void setActiveClass(String myClass)
+	{
+		this.activeClass = myClass;
+	}
+
 }

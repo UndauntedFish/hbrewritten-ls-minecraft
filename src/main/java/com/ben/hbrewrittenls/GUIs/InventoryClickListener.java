@@ -1,5 +1,8 @@
 package com.ben.hbrewrittenls.GUIs;
 
+import com.ben.hbrewrittenls.Main;
+import com.ben.hbrewrittenls.PlayerData;
+import com.ben.hbrewrittenls.database.Queries;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -16,6 +19,7 @@ public class InventoryClickListener implements Listener
 	public void onGUIClick(InventoryClickEvent e)
 	{
 		Player player = (Player) e.getWhoClicked();
+		PlayerData pd = Main.getInstance().playerDataMap.get(player.getUniqueId());
 
         // If opened GUI's title is equal to that of our GUI, don't let the player take any items from there
         if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).equals("Pick your class"))
@@ -40,7 +44,7 @@ public class InventoryClickListener implements Listener
             switch (clickedItemName)
             {
                 case "Scout":
-                	if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+                	if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Scout!");
                 	}
@@ -48,12 +52,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Scout!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
                     	ClassSelectionGUI.apply(player);
                 	}
                     break;
                 case "Archer":
-                	if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+                	if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Archer!");
                 	}
@@ -61,12 +66,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Archer!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
                     	ClassSelectionGUI.apply(player);
                 	}
                     break;
                 case "Priest":
-                	if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+                	if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                 		player.sendMessage(ChatColor.GOLD + "You have already chosen Priest!");
                 	}
@@ -74,12 +80,13 @@ public class InventoryClickListener implements Listener
                 	{
                 		player.sendMessage(ChatColor.GOLD + "Class set to Scout!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                		ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}
                 	break;
     			case "Wizard":
-    				if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+    				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Wizard!");
                 	}
@@ -87,12 +94,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Wizard!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}
                     break;
     			case "Demo":
-    				if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+    				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Demo!");
                 	}
@@ -100,12 +108,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Demo!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}
     				break;
     			case "Mage":
-    				if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+    				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Mage!");
                 	}
@@ -113,12 +122,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Mage!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}
     				break;
     			case "Paladin":
-    				if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+    				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Paladin!");
                 	}
@@ -126,12 +136,13 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Paladin!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}                    
     				break;
     			case "Sorceror":
-    				if (ClassSelectionGUI.getActiveClass(player).equals(clickedItemName.toUpperCase()))
+    				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Sorceror!");
                 	}
@@ -139,8 +150,9 @@ public class InventoryClickListener implements Listener
                 	{
                     	player.sendMessage(ChatColor.GOLD + "Class set to Sorceror!");
                     	ClassSelectionGUI.selectClass(clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.setActiveClass(player, clickedItemName.toUpperCase());
-                    	ClassSelectionGUI.apply(player);
+						Queries.setActiveClass(player.getUniqueId(), clickedItemName.toUpperCase());
+						pd.setActiveClass(clickedItemName.toUpperCase());
+						ClassSelectionGUI.apply(player);
                 	}                    
     				break;
                 default:
