@@ -1,16 +1,20 @@
 package com.ben.hbrewrittenls;
 
-import com.ben.hbrewrittenls.listeners.PlayerJoinListener;
+import com.ben.hbrewrittenls.listeners.AsyncPlayerDataLoader;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class Main extends JavaPlugin
 {
     // Instance of this main class used throughout all classes. Accessed via Main.getInstance().
     private static Main instance;
 
+    public HashMap<UUID, PlayerData> playerDataMap = new HashMap<>();
 
     // Key used in com.ben.hbrewritten.GUIs.ClassSelectionGUI to enable enchantment glows.
     public NamespacedKey key = new NamespacedKey(this, getDescription().getName());
@@ -43,7 +47,7 @@ public class Main extends JavaPlugin
         hikari.addDataSourceProperty("password", password);
 
         // EventHandlers
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new AsyncPlayerDataLoader(), this);
 
     }
 
