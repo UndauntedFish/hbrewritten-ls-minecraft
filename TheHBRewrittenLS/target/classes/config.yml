@@ -1,0 +1,23 @@
+# Default lobby world name
+lobbyworldname: LOB01
+
+# Lobby HUD Countdown timer (in seconds)
+time: 30.0
+
+# The minimum number of players in the lobby needed to start the timer:
+minplayers: 3
+
+# Destination gameserver name (which is the server players will be sent to once the lobby timer reaches 0)
+gameserver: HBR01
+
+# Cost of a Herobrine Pass in tokens (default is 1000 tokens)
+passcost: 1000
+
+
+# Database setup
+host: localhost
+port: 3306
+database: thehb_rewritten
+table: player
+username: root
+password:
