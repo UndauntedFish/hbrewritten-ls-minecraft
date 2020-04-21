@@ -8,9 +8,9 @@ public class PlayerData
 {
 	private UUID uuid;
 	
-	private int points;
+	private int points, tokens;
 	private Rank rank;
-	private boolean hasDataLoaded;
+	private boolean hasDataLoaded, isHerobrine;
 	private String activeClass;
 	
 	public PlayerData(UUID uuid)
@@ -18,6 +18,7 @@ public class PlayerData
 		this.uuid = uuid;
 		this.rank = Rank.setRankFromPoints(points);
 		this.hasDataLoaded = false;
+		this.isHerobrine = false;
 	}
 	
 	public UUID getUUID()
@@ -68,6 +69,26 @@ public class PlayerData
 	public void setActiveClass(String myClass)
 	{
 		this.activeClass = myClass;
+	}
+
+	public int getTokens()
+	{
+		return tokens;
+	}
+
+	public void setTokens(int tokens)
+	{
+		this.tokens = tokens;
+	}
+
+	public boolean isHerobrine()
+	{
+		return isHerobrine;
+	}
+
+	public void setHerobrine(boolean isHerobrine)
+	{
+		this.isHerobrine = isHerobrine;
 	}
 
 }

@@ -24,12 +24,12 @@ public class AsyncPlayerDataLoader implements Listener
     @EventHandler
     public void onPlayerJoin(AsyncPlayerPreLoginEvent e) throws SQLException
     {
-        //OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(e.getUniqueId());
         UUID uuid = e.getUniqueId();
 
         // Adds player to the database if they new, but does nothing if they are already in it.
         Queries.safeAddPlayerToDB(uuid);
 
+        // Building up the player's PlayerData object
         PlayerData pd = new PlayerData(uuid);
 
         int points = Queries.getPoints(uuid);
@@ -39,6 +39,10 @@ public class AsyncPlayerDataLoader implements Listener
         String activeClass = Queries.getActiveClass(uuid);
         pd.setActiveClass(activeClass);
 
+        int tokens = Queries.getTokens(uuid);
+        pd.setTokens(tokens);
+
+        // Adding the PlayerData object to the main class's hashmap.
         if (Main.getInstance().playerDataMap.containsKey(uuid))
         {
             Main.getInstance().playerDataMap.replace(uuid, pd);
