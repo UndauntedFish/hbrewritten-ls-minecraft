@@ -1,0 +1,6 @@
+name: TheHBRewrittenLS_DBtest
+version: 1.0-SNAPSHOT
+main: com.ben.hbrewrittenls.Main
+api-version: 1.15
+authors: [UndauntedPhish]
+description: The lobbyserver plugin for The Herobrine Rewritten!
