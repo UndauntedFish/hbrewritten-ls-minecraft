@@ -8,7 +8,6 @@ import com.ben.hbrewrittenls.lobbytimer.BossbarTimer;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -73,7 +72,7 @@ public class Main extends JavaPlugin
         Bukkit.getPluginManager().registerEvents(new HerobrinePassListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerLeaveListener(), this);
-
+        Bukkit.getPluginManager().registerEvents(new MiscListener(), this);
     }
 
     @Override
