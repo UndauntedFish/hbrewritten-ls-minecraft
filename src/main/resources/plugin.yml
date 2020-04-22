@@ -1,4 +1,4 @@
-name: TheHBRewrittenLS_DBtest
+name: TheHBRewrittenLS
 version: ${project.version}
 main: com.ben.hbrewrittenls.Main
 api-version: 1.15
