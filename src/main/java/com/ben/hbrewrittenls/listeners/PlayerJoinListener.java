@@ -1,6 +1,8 @@
 package com.ben.hbrewrittenls.listeners;
 
 import com.ben.hbrewrittenls.Main;
+import com.ben.hbrewrittenls.PlayerData;
+import com.ben.hbrewrittenls.enums.Rank;
 import com.ben.hbrewrittenls.inventoryitems.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,8 +16,11 @@ public class PlayerJoinListener implements Listener
 	public void onJoin(PlayerJoinEvent e)
 	{		
 		Player player = e.getPlayer();
+		PlayerData pd = Main.getInstance().playerDataMap.get(player.getUniqueId());
+
 		e.setJoinMessage(null);
-		
+		pd.setRank(Rank.setRankFromPoints(pd.getPoints()));
+
 		ItemManager.addItemsToPlayerInventory(player);
 		addPlayerToTimer(player);
 	}

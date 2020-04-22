@@ -3,7 +3,6 @@ package com.ben.hbrewrittenls.listeners;
 import com.ben.hbrewrittenls.Main;
 import com.ben.hbrewrittenls.PlayerData;
 import com.ben.hbrewrittenls.database.Queries;
-import com.ben.hbrewrittenls.enums.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -32,7 +31,6 @@ public class AsyncPlayerDataLoader implements Listener
 
         int points = Queries.getPoints(uuid);
         pd.setPoints(points);
-        pd.setRank(Rank.setRankFromPoints(points));
 
         String activeClass = Queries.getActiveClass(uuid);
         pd.setActiveClass(activeClass);

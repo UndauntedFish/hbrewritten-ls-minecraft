@@ -227,17 +227,17 @@ public class Queries
         }
 
         // Adds the player to the player table
-        AsyncUpdate updatePlayer = new AsyncUpdate(insertIntoPlayer);
+        SyncUpdate updatePlayer = new SyncUpdate(insertIntoPlayer);
         updatePlayer.setString(1, uuid.toString());
         updatePlayer.execute();
 
         // Adds the player to the hbstats table
-        AsyncUpdate updateStats = new AsyncUpdate(insertIntoStats);
+        SyncUpdate updateStats = new SyncUpdate(insertIntoStats);
         updateStats.setString(1, uuid.toString());
         updateStats.execute();
 
         // Adds the player to the hb_prem_classes table
-        AsyncUpdate updatePrem = new AsyncUpdate(insertIntoPrem);
+        SyncUpdate updatePrem = new SyncUpdate(insertIntoPrem);
         updatePrem.setString(1, uuid.toString());
         updatePrem.execute();
     }
