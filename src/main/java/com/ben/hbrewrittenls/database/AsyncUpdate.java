@@ -1,22 +1,16 @@
 package com.ben.hbrewrittenls.database;
 
 import com.ben.hbrewrittenls.Main;
-import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class AsyncUpdate extends BaseFields
 {
     private PreparedStatement preparedStatement;
     private String sql;
-
-    private CompletableFuture<Integer> result;
 
     public AsyncUpdate(String sql) throws IllegalArgumentException
     {
@@ -41,7 +35,6 @@ public class AsyncUpdate extends BaseFields
         {
             e.printStackTrace();
         }
-        this.result = new CompletableFuture<>();
     }
 
     public void setString(int index, String input)
@@ -57,7 +50,7 @@ public class AsyncUpdate extends BaseFields
     }
 
     // Executes the query. Will pause the class it got called in until the async task is done.
-    public int execute()
+    public void execute()
     {
         Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), new Runnable()
         {
@@ -66,8 +59,7 @@ public class AsyncUpdate extends BaseFields
             {
                 try
                 {
-                    result.complete(preparedStatement.executeUpdate());
-                    preparedStatement.close();
+                    preparedStatement.executeUpdate();
                 }
                 catch (SQLException e)
                 {
@@ -75,17 +67,5 @@ public class AsyncUpdate extends BaseFields
                 }
             }
         });
-
-        int updateResult = 0;
-        try
-        {
-            updateResult = result.get().intValue();
-        }
-        catch (InterruptedException | ExecutionException e)
-        {
-            e.printStackTrace();
-        }
-
-        return updateResult;
     }
 }

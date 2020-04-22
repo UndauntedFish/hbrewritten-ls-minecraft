@@ -6,11 +6,9 @@ import com.ben.hbrewrittenls.database.Queries;
 import com.ben.hbrewrittenls.enums.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.sql.SQLException;
 import java.util.UUID;
@@ -41,6 +39,8 @@ public class AsyncPlayerDataLoader implements Listener
 
         int tokens = Queries.getTokens(uuid);
         pd.setTokens(tokens);
+
+        // Add is_herobrine here. Check for int and return boolean in Queries.is_herobrine.
 
         // Adding the PlayerData object to the main class's hashmap.
         if (Main.getInstance().playerDataMap.containsKey(uuid))

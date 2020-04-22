@@ -106,7 +106,7 @@ public class Queries
 
         // Sets is_herobrine to true for the player
         AsyncUpdate update2 = new AsyncUpdate(setHerobrine);
-        update2.setString(1, "true");
+        update2.setString(1, "1");
         update2.setString(2, uuid.toString());
         update2.execute();
         pd.setHerobrine(true);
@@ -128,7 +128,7 @@ public class Queries
 
         // Sets is_herobrine to false for the player
         AsyncUpdate update2 = new AsyncUpdate(setHerobrine);
-        update2.setString(1, "false");
+        update2.setString(1, "0");
         update2.setString(2, uuid.toString());
         update2.execute();
         pd.setHerobrine(false);
