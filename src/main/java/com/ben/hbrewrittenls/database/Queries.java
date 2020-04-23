@@ -134,26 +134,7 @@ public class Queries
         pd.setHerobrine(false);
     }
 
-    // Returns the player's "is_herobrine" entry as is in the database.
-    // If it is true, that means the user used a herobrine pass.
-    public static boolean isHerobrine(UUID uuid)
-    {
-        AsyncQuery query = new AsyncQuery(isHerobrine);
-        query.setString(1, uuid.toString());
-        ResultSet rs = query.execute();
-        try
-        {
-            while (rs.next())
-            {
-                return rs.getBoolean("is_herobrine");
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
     // Gets the player's current amount of points from the database
     public static int getPoints(UUID uuid)
     {

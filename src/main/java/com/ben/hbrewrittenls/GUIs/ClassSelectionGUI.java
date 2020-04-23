@@ -18,10 +18,10 @@ public class ClassSelectionGUI
 	/* ITEMSTACKS DECLARATION */
 	
 	private static ItemStack scout = null, archer = null, priest = null, wizard = null, demo = null,
-			mage = null, sorceror = null, paladin = null;
+			mage = null, sorcerer = null, paladin = null;
 	
 	private static LeatherArmorMeta scoutMeta = null, archerMeta = null, priestMeta = null, wizardMeta = null, demoMeta = null,
-			mageMeta = null, sorcerorMeta = null, paladinMeta = null;
+			mageMeta = null, sorcererMeta = null, paladinMeta = null;
 	
 	
 	/*
@@ -55,7 +55,7 @@ public class ClassSelectionGUI
 		
 		gui.setItem(12, mage);
 		gui.setItem(13, paladin);
-		gui.setItem(14, sorceror);
+		gui.setItem(14, sorcerer);
 		
 		// FINAL
         player.openInventory(gui);
@@ -102,9 +102,9 @@ public class ClassSelectionGUI
 				paladinMeta.addEnchant(glow, 1, true);
 				paladin.setItemMeta(paladinMeta);
 				break;
-			case "SORCEROR":
-				sorcerorMeta.addEnchant(glow, 1, true);
-				sorceror.setItemMeta(sorcerorMeta);
+			case "SORCERER":
+				sorcererMeta.addEnchant(glow, 1, true);
+				sorcerer.setItemMeta(sorcererMeta);
 				break;
 			default:
 				return;
@@ -159,10 +159,10 @@ public class ClassSelectionGUI
 		paladinMeta.setColor(ClassData.PALADIN.getHelmetColor());
 		paladin.setItemMeta(paladinMeta);
 		
-		sorceror = new ItemStack(Material.LEATHER_HELMET);
-		sorcerorMeta = (LeatherArmorMeta) sorceror.getItemMeta();
-		sorcerorMeta.setDisplayName(ClassData.SORCEROR.getName());
-		sorcerorMeta.setColor(ClassData.SORCEROR.getHelmetColor());
-		sorceror.setItemMeta(sorcerorMeta);
+		sorcerer = new ItemStack(Material.LEATHER_HELMET);
+		sorcererMeta = (LeatherArmorMeta) sorcerer.getItemMeta();
+		sorcererMeta.setDisplayName(ClassData.SORCERER.getName());
+		sorcererMeta.setColor(ClassData.SORCERER.getHelmetColor());
+		sorcerer.setItemMeta(sorcererMeta);
 	}
 }

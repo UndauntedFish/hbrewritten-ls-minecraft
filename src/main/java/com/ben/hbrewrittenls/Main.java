@@ -59,6 +59,8 @@ public class Main extends JavaPlugin
         hikari.addDataSourceProperty("databaseName", database);
         hikari.addDataSourceProperty("user", username);
         hikari.addDataSourceProperty("password", password);
+
+        // Sets connection in Basefields
         try
         {
             BaseFields.connection = this.hikari.getConnection();

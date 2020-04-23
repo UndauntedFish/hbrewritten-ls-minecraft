@@ -141,7 +141,7 @@ public class InventoryClickListener implements Listener
 						ClassSelectionGUI.apply(player);
                 	}                    
     				break;
-    			case "Sorceror":
+    			case "Sorcerer":
     				if (pd.getActiveClass().equals(clickedItemName.toUpperCase()))
                 	{
                     	player.sendMessage(ChatColor.GOLD + "You have already chosen Sorceror!");

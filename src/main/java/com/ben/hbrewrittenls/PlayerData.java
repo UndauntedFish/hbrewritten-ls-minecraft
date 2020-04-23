@@ -10,14 +10,13 @@ public class PlayerData
 	
 	private int points, tokens;
 	private Rank rank;
-	private boolean hasDataLoaded, isHerobrine;
+	private boolean isHerobrine;
 	private String activeClass;
 	
 	public PlayerData(UUID uuid)
 	{
 		this.uuid = uuid;
 		this.rank = Rank.setRankFromPoints(points);
-		this.hasDataLoaded = false;
 		this.isHerobrine = false;
 	}
 	
@@ -49,16 +48,6 @@ public class PlayerData
 	public void setRank(Rank rank)
 	{
 		this.rank = rank;
-	}
-
-	public void setDataLoaded(boolean hasDataLoaded)
-	{
-		this.hasDataLoaded = hasDataLoaded;
-	}
-
-	public boolean hasDataLoaded()
-	{
-		return hasDataLoaded;
 	}
 
 	public String getActiveClass()
